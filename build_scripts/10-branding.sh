@@ -18,8 +18,8 @@ cat >$IMAGE_INFO <<EOF
 EOF
 
 OLD_PRETTY_NAME="$(sh -c '. /usr/lib/os-release ; echo $NAME $VERSION')"
-IMAGE_PRETTY_NAME="Aurora Helium"
-IMAGE_LIKE="rhel centos fedora"
+IMAGE_PRETTY_NAME="Aurora Helium (LTS)"
+IMAGE_LIKE="rhel centos"
 HOME_URL="https://getaurora.dev/"
 DOCUMENTATION_URL="https://docs.getaurora.dev/"
 SUPPORT_URL="https://github.com/ublue-os/aurora-lts/issues/"
@@ -49,3 +49,10 @@ SUPPORT_URL="${SUPPORT_URL}"
 DEFAULT_HOSTNAME="${IMAGE_PRETTY_NAME,,}"
 BUILD_ID="${SHA_HEAD_SHORT:-testing}"
 EOF
+
+mkdir -p /usr/share/wallpapers
+curl -o /usr/share/wallpapers/andromeda.jpg \
+  https://codeberg.org/HeliumOS/wallpapers/raw/commit/861d6a6b8d192a032ba00d090e41d648e2425e63/andromeda.jpg
+if [ "$(sha256sum /usr/share/wallpapers/andromeda.jpg | awk '{print $1}')" != "a3742887568d143db771faf2b6333b72d792bb165ef34add8375bbf741929853" ]; then
+  exit 1
+fi

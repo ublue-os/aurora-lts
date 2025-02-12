@@ -2,7 +2,7 @@ export repo_organization := env("GITHUB_REPOSITORY_OWNER", "ublue-os")
 export image_name := env("IMAGE_NAME", "aurora")
 export centos_version := env("CENTOS_VERSION", "stream10")
 export default_tag := env("DEFAULT_TAG", "lts")
-export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
+export bib_image := env("BIB_IMAGE", "ghcr.io/centos-workstation/bootc-image-builder:latest")
 
 alias build-vm := build-qcow2
 alias rebuild-vm := rebuild-qcow2
@@ -133,7 +133,7 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
     fi
 
     args="--type ${type}"
-    args+="--use-librepo=True"
+    args+=" --use-librepo=True"
 
     if [[ $target_image == localhost/* ]]; then
       args+=" --local"
@@ -151,7 +151,7 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
       -v /var/lib/containers/storage:/var/lib/containers/storage \
       "${bib_image}" \
       ${args} \
-      "${target_image}"
+      "${target_image}:${tag}"
 
     sudo chown -R $USER:$USER output
 
@@ -231,7 +231,7 @@ spawn-vm rebuild="0" type="qcow2" ram="6GiB":
     [ "{{ rebuild }}" -eq 1 ] && echo "Rebuilding the ISO" && just build-vm {{ rebuild }} {{ type }}
 
     systemd-vmspawn \
-      -M "achillobator" \
+      -M "aurora-helium" \
       --console=gui \
       --cpus=2 \
       --ram=$(echo 6G| /usr/bin/numfmt --from=iec) \
@@ -265,7 +265,7 @@ patch-iso-branding override="0" iso_path="output/bootiso/install.iso":
         registry.fedoraproject.org/fedora:latest \
         bash -c 'dnf install -y lorax mkksiso && \
     	mkdir /images && cd /iso_files/product && find . | cpio -c -o | gzip -9cv > /images/product.img && cd / \
-            && mkksiso --add images --volid achillobator-boot /{{ iso_path }} /output/final.iso'
+            && mkksiso --add images --volid aurora-helium-boot /{{ iso_path }} /output/final.iso'
 
     if [ {{ override }} -ne 0 ] ; then
         mv output/final.iso {{ iso_path }}
