@@ -6,3 +6,6 @@ dnf install -y \
 
 dnf config-manager --set-enabled \
     crb
+
+
+dnf remove -y subscription-manager

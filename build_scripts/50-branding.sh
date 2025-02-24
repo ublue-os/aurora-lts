@@ -3,12 +3,6 @@
 set -xeu
 
 
-rm -rf /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
-rm -rf /usr/share/wallpapers/fedora
-rm -rf /usr/share/backgrounds/*
-rm -rf /usr/share/sddm/themes/01-breeze-fedora
-
-
 mkdir -p /etc/xdg && \
     touch /etc/xdg/system.kdeglobals
 

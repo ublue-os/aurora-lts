@@ -17,6 +17,8 @@ COPY build_scripts /var/tmp/build_scripts
 COPY build_scripts_overrides /var/tmp/build_scripts_overrides
 
 RUN /var/tmp/build_scripts/10-repos.sh
+RUN /var/tmp/build_scripts/20-core.sh
 RUN /var/tmp/build_scripts/30-desktop.sh
-RUN /var/tmp/build_scripts/40-branding.sh
-RUN /var/tmp/build_scripts/50-prune.sh
+RUN /var/tmp/build_scripts/40-utils.sh
+RUN /var/tmp/build_scripts/50-branding.sh
+RUN /var/tmp/build_scripts/60-prune.sh

@@ -10,3 +10,7 @@ dnf install -y --nobest \
 
 systemctl enable \
     sddm.service
+
+
+dnf install -y \
+    plymouth-system-theme
