@@ -16,4 +16,7 @@ COPY system_files_overrides /var/tmp/system_files_overrides
 COPY build_scripts /var/tmp/build_scripts
 COPY build_scripts_overrides /var/tmp/build_scripts_overrides
 
-RUN /var/tmp/build_scripts/build.sh
+RUN /var/tmp/build_scripts/10-repos.sh
+RUN /var/tmp/build_scripts/30-desktop.sh
+RUN /var/tmp/build_scripts/40-branding.sh
+RUN /var/tmp/build_scripts/50-prune.sh

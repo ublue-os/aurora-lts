@@ -1,30 +1,13 @@
 #!/usr/bin/env bash
 
-dnf install -y \
-    epel-release
-
-
-dnf config-manager --set-enabled \
-    crb
-
-
-dnf install -y --nobest \
-	@"KDE Plasma Workspaces"
-
-
-dnf remove -y \
-    setroubleshoot \
-    cockpit \
-    krfb
+set -xeu
 
 
 rm -rf /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
 rm -rf /usr/share/wallpapers/fedora
 rm -rf /usr/share/backgrounds/*
+rm -rf /usr/share/sddm/themes/01-breeze-fedora
 
-
-systemctl enable \
-    sddm.service
 
 mkdir -p /etc/xdg && \
     touch /etc/xdg/system.kdeglobals
@@ -96,8 +79,5 @@ do
 done
 
 
-rm /etc/sddm.conf
-sed -i 's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wallpapers/HeliumOS-Andromeda/contents/andromeda.jpg,g' /usr/share/sddm/themes/breeze/theme.conf
-
-
-ln -s /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg /usr/share/backgrounds/default.png
+sed -i 's,background=/usr/share/wallpapers/Next/contents/images/5120x2880.png,background=/usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg,g' /usr/share/sddm/themes/breeze/theme.conf
+sed -i 's,#Current=01-breeze-fedora,Current=breeze,g' /etc/sddm.conf
