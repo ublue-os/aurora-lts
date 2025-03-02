@@ -80,4 +80,4 @@ sed -i 's,#Current=01-breeze-fedora,Current=breeze,g' /etc/sddm.conf
 dnf remove -y \
     lsb_release
 rm /etc/redhat-release
-echo "HOMEBREW_OS_VERSION=Aurora Helium (LTS)" >> /etc/profile
+echo "HOMEBREW_OS_VERSION='Aurora Helium (LTS)'" >> /etc/profile

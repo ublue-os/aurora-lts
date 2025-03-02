@@ -5,7 +5,8 @@ set -xeu
 
 
 dnf install -y --nobest \
-	@"KDE Plasma Workspaces"
+	@"KDE Plasma Workspaces" \
+    falkon
 
 
 systemctl enable \
