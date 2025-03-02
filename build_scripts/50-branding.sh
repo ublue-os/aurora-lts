@@ -75,3 +75,9 @@ done
 
 sed -i 's,background=/usr/share/wallpapers/Next/contents/images/5120x2880.png,background=/usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg,g' /usr/share/sddm/themes/breeze/theme.conf
 sed -i 's,#Current=01-breeze-fedora,Current=breeze,g' /etc/sddm.conf
+
+
+dnf remove -y \
+    lsb_release
+rm /etc/redhat-release
+echo "HOMEBREW_OS_VERSION=Aurora Helium (LTS)" >> /etc/profile
