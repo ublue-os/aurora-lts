@@ -1,0 +1,35 @@
+_default:
+    @just --list --list-heading $'Available ujust commands:\n' --list-prefix $' - '
+
+
+alias upgrade := update
+# Update your system, apps, and distrobox containers
+update:
+    distrobox upgrade --all --root
+    distrobox upgrade --all
+    flatpak update -y --user
+    flatpak update -y --system
+    sudo bootc upgrade
+
+
+# (placeholder) Enable/Disable automatic updates for system, apps, distrobox, or all
+# auto-updates ENABLE="true" TARGET="all":
+#     echo 'toggle updates'
+
+
+# Enroll your secure boot key, neccessary for secure boot
+# secure-boot-key-enroll:
+#     sudo mokutil --timeout -1
+#     echo 'The next line will prompt for a MOK password. Then, input "universalblue"'
+#     sudo mokutil --import /etc/pki/akmods/certs/akmods-ublue.der
+#     echo 'At next reboot, the mokutil UEFI menu UI will be displayed (*QWERTY* keyboard input and navigation).\nThen, select "Enroll MOK", and input "universalblue" as the password'
+
+
+# Boot into your UEFI (BIOS) firmware
+firmware:
+    #!/usr/bin/env bash
+    if [ -d /sys/firmware/efi ]; then
+    systemctl reboot --firmware-setup
+    else
+    echo "Rebooting to legacy BIOS from OS is not supported."
+    fi
