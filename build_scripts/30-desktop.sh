@@ -14,9 +14,5 @@ systemctl enable \
 
 
 dnf install -y \
-    plymouth-system-theme
-
-
-dnf install -y \
     --enablerepo copr:copr.fedorainfracloud.org:che:nerd-fonts \
         nerd-fonts

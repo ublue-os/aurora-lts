@@ -22,7 +22,8 @@ dnf -y update
 dnf -y install \
     @multimedia \
     gstreamer1-plugins-{bad-free,bad-free-libs,good,base} lame{,-libs} \
-    libjxl
+    libjxl \
+    fuse
 
 
 dnf install -y --nobest \
@@ -44,4 +45,10 @@ dnf install -y --nobest \
 
 dnf -y install \
 	plymouth \
+    plymouth-system-theme \
 	fwupd
+
+
+KERNEL_SUFFIX=""
+QUALIFIED_KERNEL="$(rpm -qa | grep -P 'kernel-(|'"$KERNEL_SUFFIX"'-)(\d+\.\d+\.\d+)' | sed -E 's/kernel-(|'"$KERNEL_SUFFIX"'-)//')"
+/usr/bin/dracut --no-hostonly --kver "$QUALIFIED_KERNEL" --reproducible --zstd -v --add ostree -f "/lib/modules/$QUALIFIED_KERNEL/initramfs.img"
