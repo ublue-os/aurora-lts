@@ -19,6 +19,9 @@ sed -i 's,https://centos.org/,https://getaurora.dev/,g' /usr/lib/os-release && \
     sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
     sed -i 's,VENDOR_NAME="CentOS",VENDOR_NAME="Universal Blue",g' /usr/lib/os-release && \
     sed -i 's,ANSI_COLOR="0;31",ANSI_COLOR="0;38;2;60;110;180",g' /usr/lib/os-release
+if [[ -n "${SHA_HEAD_SHORT:-}" ]]; then
+echo "BUILD_ID=\"$SHA_HEAD_SHORT\"" >>/usr/lib/os-release
+fi
 
 
 ln -sf /usr/share/icons/hicolor/scalable/distributor-logo.svg /usr/share/icons/hicolor/scalable/apps/aurora-helium-logo-icon.svg && \
