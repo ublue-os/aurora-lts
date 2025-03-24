@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+just --justfile /usr/share/ublue-os/justfile "${@}"
