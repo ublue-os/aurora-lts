@@ -11,7 +11,7 @@ sed -i 's,https://centos.org/,https://getaurora.dev/,g' /usr/lib/os-release && \
     sed -i 's,https://issues.redhat.com/,https://github.com/ublue-os/aurora-lts/issues,g' /usr/lib/os-release && \
     sed -i 's,LOGO="fedora-logo-icon",LOGO="aurora-helium-logo-icon",g' /usr/lib/os-release && \
     sed -i 's,10 (Coughlan),10,g' /usr/lib/os-release && \
-    sed -i 's,ID="centos",ID="aurora-helium",g' /usr/lib/os-release && \
+ # https://github.com/osbuild/bootc-image-builder/pull/857  sed -i 's,ID="centos",ID="aurora-helium",g' /usr/lib/os-release && \
     sed -i 's,REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux 10",,g' /usr/lib/os-release && \
     sed -i 's,REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream",,g' /usr/lib/os-release && \
     sed -i 's,CentOS Stream,Aurora Helium (LTS),g' /usr/lib/os-release && \
