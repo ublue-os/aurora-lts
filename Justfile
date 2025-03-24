@@ -169,38 +169,6 @@ _rootful_load_image $target_image=image_name $tag=default_tag:
         just sudoif podman pull "${target_image}:${tag}"
     fi
 
-build-network-iso $target_image:
-    #!/usr/bin/env bash
-    set -xeu pipefail
-    mkdir -p output
-    podman run \
-        --rm \
-        --pull always \
-        -v output:/output:z \
-        quay.io/centos-bootc/centos-bootc:stream10 \
-        bash -c ' \
-        rm \
-            -f \
-            /output/install.iso \
-        && \
-        echo "ostreecontainer --url ${target_image}" >> /aurora-helium.ks \
-        &&
-        curl \
-            -o /upstream.iso \
-            -J -L \
-            https://download.cf.centos.org/10-stream/BaseOS/x86_64/iso/CentOS-Stream-10-latest-x86_64-boot.iso \
-        && \
-        dnf install \
-            -y \
-            lorax \
-        && \
-        mkksiso \
-            --ks /aurora-helium.ks \
-            /upstream.iso \
-            /output/install.iso \
-        '
-
-
 # Build a bootc bootable image using Bootc Image Builder (BIB)
 # Converts a container image to a bootable image
 # Parameters:
@@ -265,7 +233,8 @@ build-raw $target_image=("localhost/" + image_name) $tag=default_tag: && (_build
 
 # Build an ISO virtual machine image
 [group('Build Virtal Machine Image')]
-build-iso $target_image=("localhost/" + image_name) $tag=default_tag: && (_build-bib target_image tag "iso" "iso.toml")
+build-iso:
+    @echo Unimplemented
 
 # Rebuild a QCOW2 virtual machine image
 [group('Build Virtal Machine Image')]
@@ -351,60 +320,6 @@ spawn-vm rebuild="0" type="qcow2" ram="6G":
       --network-user-mode \
       --vsock=false --pass-ssh-key=false \
       -i ./output/**/*.{{ type }}
-
-##########################
-#  'customize-iso-build' #
-##########################
-# Description:
-# Enables the manual customization of the osbuild manifest before running the ISO build
-#
-# Mount the configuration file and output directory
-# Clear the entrypoint to run the custom command
-
-# Run osbuild with the specified parameters
-customize-iso-build:
-    sudo podman run \
-    --rm -it \
-    --privileged \
-    --pull=newer \
-    --net=host \
-    --security-opt label=type:unconfined_t \
-    -v $(pwd)/iso.toml \
-    -v $(pwd)/output:/output \
-    -v /var/lib/containers/storage:/var/lib/containers/storage \
-    --entrypoint "" \
-    "${bib_image}" \
-    osbuild --store /store --output-directory /output /output/manifest-iso.json --export bootiso
-
-##########################
-#  'patch-iso-branding'  #
-##########################
-# Description:
-# creates a custom branded ISO image. As per https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/anaconda_customization_guide/sect-iso-images#sect-product-img
-# Parameters:
-#   override: A flag to determine if the final ISO should replace the original ISO (default is 0).
-#   iso_path: The path to the original ISO file.
-# Runs a Podman container with Fedora image. Installs 'lorax' and 'mkksiso' tools inside the container. Creates a compressed 'product.img'
-# from the Brnading images in the 'iso_files' directory. Uses 'mkksiso' to add the 'product.img' to the original ISO and creates 'final.iso'
-# in the output directory. If 'override' is not 0, replaces the original ISO with the newly created 'final.iso'.
-
-# applies custom branding to an ISO image.
-patch-iso-branding override="0" iso_path="output/bootiso/install.iso":
-    #!/usr/bin/env bash
-    podman run \
-        --rm \
-        -it \
-        --pull=newer \
-        --privileged \
-        -v ./output:/output \
-        -v ./iso_files:/iso_files \
-        quay.io/centos/centos:stream10 \
-        bash -c 'dnf install -y lorax && \
-    	mkdir /images && cd /iso_files/product && find . | cpio -c -o | gzip -9cv > /images/product.img && cd / \
-            && mkksiso --add images --volid aurora-boot /{{ iso_path }} /output/final.iso'
-    if [ {{ override }} -ne 0 ] ; then
-        mv output/final.iso {{ iso_path }}
-    fi
 
 # Runs shell check on all Bash scripts
 lint:
