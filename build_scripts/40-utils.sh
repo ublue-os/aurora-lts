@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-
 set -xeu
-
 
 dnf install -y \
 	@development \
-    distrobox \
+	distrobox \
 	distribution-gpg-keys \
 	fastfetch \
 	fpaste \
@@ -14,17 +12,15 @@ dnf install -y \
 	powertop \
 	tuned-ppd
 
-
 dnf install -y \
 	--enablerepo copr:copr.fedorainfracloud.org:ublue-os:packages \
-		ublue-brew \
-		ublue-fastfetch \
-		ublue-os-luks \
-		ublue-os-signing \
-		ublue-os-udev-rules \
-		ublue-os-update-services \
-		ublue-polkit-rules
-
+	ublue-brew \
+	ublue-fastfetch \
+	ublue-os-luks \
+	ublue-os-signing \
+	ublue-os-udev-rules \
+	ublue-os-update-services \
+	ublue-polkit-rules
 
 # shellcheck disable=SC2016
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /etc/bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>/etc/bashrc
