@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-
 set -xeu
-
 
 run_buildscripts_for() {
 	WHAT=$1
@@ -15,7 +13,6 @@ run_buildscripts_for() {
 	done
 }
 
-
 copy_systemfiles_for() {
 	WHAT=$1
 	shift
@@ -24,10 +21,8 @@ copy_systemfiles_for() {
 	printf "::endgroup::\n"
 }
 
-
 MAJOR_VERSION_NUMBER="$(sh -c '. /usr/lib/os-release ; echo $VERSION_ID')"
 export MAJOR_VERSION_NUMBER
-
 
 for script in /var/tmp/build_scripts/*-*.sh; do
 	printf "::group:: ===%s===\n" "$(basename "$script")"
@@ -35,10 +30,8 @@ for script in /var/tmp/build_scripts/*-*.sh; do
 	printf "::endgroup::\n"
 done
 
-
 copy_systemfiles_for "$(arch)"
 run_buildscripts_for "$(arch)"
-
 
 if [ "$ENABLE_DX" == "1" ]; then
 	copy_systemfiles_for dx
@@ -47,13 +40,11 @@ if [ "$ENABLE_DX" == "1" ]; then
 	run_buildscripts_for "$(arch)/dx"
 fi
 
-
-if [ "$ENABLE_GDX" == "1" ] ; then
+if [ "$ENABLE_GDX" == "1" ]; then
 	# We explicitly only support x86 on nvidia (unless they update it?)
 	copy_systemfiles_for "x86_64-gdx"
 	run_buildscripts_for "x86_64/gdx"
 fi
-
 
 if [ "$ENABLE_HWE" == "1" ]; then
 	copy_systemfiles_for hwe
@@ -61,6 +52,5 @@ if [ "$ENABLE_HWE" == "1" ]; then
 	copy_systemfiles_for "$(arch)-hwe"
 	run_buildscripts_for "$(arch)/hwe"
 fi
-
 
 /var/tmp/build_scripts/cleanup.sh
