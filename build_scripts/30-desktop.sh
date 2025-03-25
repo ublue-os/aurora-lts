@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
 
-
 set -xeu
-
 
 dnf install -y --nobest \
 	@"KDE Plasma Workspaces" \
-    falkon
-
+	falkon
 
 systemctl enable \
-    sddm.service
-
+	sddm.service
 
 dnf install -y \
-    --enablerepo copr:copr.fedorainfracloud.org:che:nerd-fonts \
-        nerd-fonts
+	--enablerepo copr:copr.fedorainfracloud.org:che:nerd-fonts \
+	nerd-fonts
