@@ -8,7 +8,7 @@ dnf install -y \
 # VSCode on the base image!
 dnf config-manager --add-repo "https://packages.microsoft.com/yumrepos/vscode"
 dnf config-manager --set-disabled packages.microsoft.com_yumrepos_vscode
-dnf -y --enablerepo packages.microsoft.com_yumrepos_vscode --nogpgcheck  install code
+dnf -y --enablerepo packages.microsoft.com_yumrepos_vscode --nogpgcheck install code
 
 dnf config-manager --add-repo "https://download.docker.com/linux/centos/docker-ce.repo"
 dnf config-manager --set-disabled docker-ce-stable
@@ -40,7 +40,7 @@ KIND_LATEST_VERSION="$(curl -L https://api.github.com/repos/kubernetes-sigs/kind
 KIND_TMP="$(mktemp -d)"
 
 clean_kind() {
-  rm -rf "${KIND_TMP}"
+	rm -rf "${KIND_TMP}"
 }
 trap clean_kind EXIT
 
