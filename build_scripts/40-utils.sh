@@ -14,7 +14,6 @@ dnf install -y \
 
 dnf install -y \
 	--enablerepo copr:copr.fedorainfracloud.org:ublue-os:packages \
-	ublue-brew \
 	ublue-fastfetch \
 	ublue-os-luks \
 	ublue-os-signing \
