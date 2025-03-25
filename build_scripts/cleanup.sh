@@ -7,9 +7,9 @@ set -euo
 shopt -s extglob
 
 
-rm -rf /var/!(cache)
-rm -rf /var/cache/!(rpm-ostree)
-rm -rf /var/tmp
+# shellcheck disable=SC2114
+rm -rf /var && mkdir -p /var
+
 dnf clean all
 
 

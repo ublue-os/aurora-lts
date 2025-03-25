@@ -26,4 +26,5 @@ dnf install -y \
 		ublue-polkit-rules
 
 
+# shellcheck disable=SC2016
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /etc/bashrc
