@@ -5,8 +5,6 @@ set -xeu
 mkdir -p /etc/xdg &&
 	touch /etc/xdg/system.kdeglobals
 
-# https://github.com/osbuild/bootc-image-builder/pull/857  sed -i 's,ID="centos",ID="aurora-helium",g' /usr/lib/os-release && (Add slash)
-
 sed -i 's,https://centos.org/,https://getaurora.dev/,g' /usr/lib/os-release &&
 	sed -i 's,https://issues.redhat.com/,https://github.com/ublue-os/aurora-lts/issues,g' /usr/lib/os-release &&
 	sed -i 's,LOGO="fedora-logo-icon",LOGO="aurora-helium-logo-icon",g' /usr/lib/os-release &&
@@ -15,6 +13,7 @@ sed -i 's,https://centos.org/,https://getaurora.dev/,g' /usr/lib/os-release &&
 	sed -i 's,REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream",,g' /usr/lib/os-release &&
 	sed -i 's,CentOS Stream,Aurora Helium (LTS),g' /usr/lib/os-release &&
 	sed -i 's,CPE_NAME="cpe:/o:centos:centos:10",CPE_NAME="cpe:/o:universal-blue:aurora-lts:10",g' /usr/lib/os-release &&
+	sed -i 's,ID="centos",ID="aurora-helium",g' /usr/lib/os-release &&
 	sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release &&
 	sed -i 's,VENDOR_NAME="CentOS",VENDOR_NAME="Universal Blue",g' /usr/lib/os-release &&
 	sed -i 's,ANSI_COLOR="0;31",ANSI_COLOR="0;38;2;60;110;180",g' /usr/lib/os-release
