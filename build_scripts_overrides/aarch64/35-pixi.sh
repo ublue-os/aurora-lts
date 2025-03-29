@@ -1,1 +1,1 @@
-../gdx/35-pixi.sh
+../shared/pixi.sh
