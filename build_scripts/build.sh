@@ -4,7 +4,7 @@ set -xeu pipefail
 
 copy_variant() {
 	VARIANT=$1
-	printf "::group:: ===${VARIANT}===\n"
+	printf "::group:: ===COPYING ${VARIANT}===\n"
 	cp -afrv "/var/tmp/system_files_overrides/${VARIANT}/." /
 	cp -afrv "/var/tmp/system_files_overrides/${ARCH}-${VARIANT}/." /
 	cp -afrv "/var/tmp/build_scripts_overrides/${VARIANT}/." /var/tmp/build_scripts/
