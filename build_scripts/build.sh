@@ -4,18 +4,19 @@ set -xeu pipefail
 
 copy_variant() {
 	VARIANT=$1
-	printf "COPYING ${VARIANT}\n"
+	printf "::group:: ===${VARIANT}===\n"
 	cp -rvf "/var/tmp/system_files_overrides/${VARIANT}/*" /
 	cp -rvf "/var/tmp/system_files_overrides/${ARCH}-${VARIANT}/*" /
 	cp -rvf "/var/tmp/build_scripts_overrides/${VARIANT}/*" /var/tmp/build_scripts/
 	cp -rvf "/var/tmp/build_scripts_overrides/${ARCH}-${VARIANT}/*" /var/tmp/build_scripts/
+	printf "::endgroup::\n"
 }
 
 cp -avf "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
 
 printf "::group:: ===COPYING ${ARCH}===\n"
-cp -avf "/var/tmp/system_files_overrides/${ARCH}" /
-cp -avf "/var/tmp/build_scripts_overrides/${ARCH}" /var/tmp/build_scripts/
+cp -rvf "/var/tmp/system_files_overrides/${ARCH}"/* /
+cp -rvf "/var/tmp/build_scripts_overrides/${ARCH}"/* /var/tmp/build_scripts/
 
 if [ "$ENABLE_DX" == "1" ]; then
 	copy_variant dx
