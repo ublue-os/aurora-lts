@@ -40,6 +40,6 @@ cd /var/tmp/build_scripts
 for script in ./*.sh; do
 	cd /var/tmp/build_scripts
 	printf "::group:: ===RUNNING ${script}===\n"
-	${script} || (printf "Failed to run ${script}\n" && exit 1)
+	${script} || (printf "Failed to run ${script}\n" && printf "PWD=${PWD}\n" && exit 1)
 	printf "::endgroup::\n"
 done
