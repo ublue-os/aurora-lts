@@ -5,19 +5,19 @@ set -xeu pipefail
 copy_variant() {
 	VARIANT=$1
 	printf "::group:: ===COPYING ${VARIANT}===\n"
-	cp -afrv "/var/tmp/system_files_overrides/${VARIANT}/." /
-	cp -afrv "/var/tmp/system_files_overrides/${ARCH}-${VARIANT}/." /
-	cp -afrv "/var/tmp/build_scripts_overrides/${VARIANT}/." /var/tmp/build_scripts/
-	cp -afrv "/var/tmp/build_scripts_overrides/${ARCH}-${VARIANT}/." /var/tmp/build_scripts/
+	cp -av "/var/tmp/system_files_overrides/${VARIANT}/." /
+	cp -av "/var/tmp/system_files_overrides/${ARCH}-${VARIANT}/." /
+	cp -av "/var/tmp/build_scripts_overrides/${VARIANT}/." /var/tmp/build_scripts/
+	cp -av "/var/tmp/build_scripts_overrides/${ARCH}-${VARIANT}/." /var/tmp/build_scripts/
 	printf "::endgroup::\n"
 }
 
 # Copy directory
-cp -frv "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
+cp -av "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
 
 printf "::group:: ===COPYING ${ARCH}===\n"
-cp -frv "/var/tmp/system_files_overrides/${ARCH}"/* /
-cp -frv "/var/tmp/build_scripts_overrides/${ARCH}"/*.sh /var/tmp/build_scripts/
+cp -av "/var/tmp/system_files_overrides/${ARCH}"/. /
+cp -av "/var/tmp/build_scripts_overrides/${ARCH}"/. /var/tmp/build_scripts/
 
 if [ "$ENABLE_DX" == "1" ]; then
 	copy_variant dx
