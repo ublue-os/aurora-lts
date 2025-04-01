@@ -16,8 +16,8 @@ copy_variant() {
 cp -frv "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
 
 printf "::group:: ===COPYING ${ARCH}===\n"
-cp -afrv "/var/tmp/system_files_overrides/${ARCH}"/. /
-cp -afrv "/var/tmp/build_scripts_overrides/${ARCH}"/. /var/tmp/build_scripts/
+cp -frv "/var/tmp/system_files_overrides/${ARCH}"/* /
+cp -frv "/var/tmp/build_scripts_overrides/${ARCH}"/* /var/tmp/build_scripts/
 
 if [ "$ENABLE_DX" == "1" ]; then
 	copy_variant dx
