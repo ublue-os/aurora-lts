@@ -37,6 +37,7 @@ export MAJOR_VERSION_NUMBER
 
 cd /var/tmp/build_scripts
 for script in ./*.sh; do
+	cd /var/tmp/build_scripts
 	printf "::group:: ===RUNNING ${script}===\n"
 	${script} || (printf "Failed to run ${script}\n" && exit 1)
 	printf "::endgroup::\n"
