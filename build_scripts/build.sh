@@ -12,7 +12,8 @@ copy_variant() {
 	printf "::endgroup::\n"
 }
 
-cp -afrv "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
+# Copy directory
+cp -frv "/var/tmp/build_scripts_overrides/shared" /var/tmp/build_scripts/
 
 printf "::group:: ===COPYING ${ARCH}===\n"
 cp -afrv "/var/tmp/system_files_overrides/${ARCH}"/. /
