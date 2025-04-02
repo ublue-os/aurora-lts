@@ -1,1 +1,0 @@
-../shared/pixi.sh
