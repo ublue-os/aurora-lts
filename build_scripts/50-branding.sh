@@ -39,9 +39,10 @@ for plasma_theme in "${plasma_themes[@]}"; do
 	done
 done
 
+mkdir -p /var/tmp/wallpapers
 curl -o /var/tmp/wallpapers.tar.gz https://codeberg.org/HeliumOS/wallpapers/archive/eccec97df37d4d5aee4f23e1e57b46c0e4e6c484.tar.gz &&
 	tar -xzf /var/tmp/wallpapers.tar.gz &&
-	mv wallpapers /var/tmp/wallpapers
+	mv wallpapers/* /var/tmp/wallpapers
 
 mkdir -p /usr/share/wallpapers/Andromeda/contents/images &&
 	cp /var/tmp/wallpapers/andromeda.jpg /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg &&
@@ -69,5 +70,5 @@ sed -i 's,#Current=01-breeze-fedora,Current=breeze,g' /etc/sddm.conf
 
 dnf remove -y \
 	lsb_release
-rm /etc/redhat-release
+rm -f /etc/redhat-release
 echo "HOMEBREW_OS_VERSION='Aurora Helium (LTS)'" >>/etc/profile
