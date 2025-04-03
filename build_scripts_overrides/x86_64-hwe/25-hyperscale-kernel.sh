@@ -2,14 +2,6 @@
 
 set -xeuo pipefail
 
-# The hyperscale SIG's kernel straight from their official builds
-
-dnf install -y \
-    centos-release-hyperscale-kernel
-
-dnf config-manager \
-    --set-disabled "centos-hyperscale,centos-hyperscale-kernel"
-
 dnf versionlock delete \
     kernel \
     kernel-devel \

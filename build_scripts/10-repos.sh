@@ -20,3 +20,8 @@ dnf config-manager --add-repo \
 	"https://copr.fedorainfracloud.org/coprs/che/nerd-fonts/repo/centos-stream-${MAJOR_VERSION_NUMBER}/che-nerd-fonts-centos-stream-${MAJOR_VERSION_NUMBER}.repo"
 dnf config-manager --set-disabled \
 	copr:copr.fedorainfracloud.org:che:nerd-fonts
+
+dnf install -y \
+    centos-release-hyperscale-kernel
+dnf config-manager \
+    --set-disabled "centos-hyperscale,centos-hyperscale-kernel"
