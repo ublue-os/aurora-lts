@@ -4,7 +4,10 @@ set -xeu
 
 dnf install -y --nobest \
 	@"KDE Plasma Workspaces" \
-	falkon
+	falkon \
+ 	kcalc \
+  	kolourpaint \
+  	okular
 
 systemctl enable \
 	sddm.service
