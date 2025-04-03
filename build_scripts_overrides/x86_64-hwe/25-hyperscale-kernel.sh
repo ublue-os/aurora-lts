@@ -22,7 +22,7 @@ dnf versionlock delete \
 
 dnf update -y \
     --enablerepo="centos-hyperscale" \
-    --enablerepo="centos-hyperscale-kernel"
+    --enablerepo="centos-hyperscale-kernel" \
     kernel
 
 dnf versionlock add \
