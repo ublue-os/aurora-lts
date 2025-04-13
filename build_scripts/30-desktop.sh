@@ -4,7 +4,8 @@ set -xeu
 
 dnf install -y --nobest \
 	@"KDE Plasma Workspaces" \
-	falkon
+	falkon \
+ 	plasma-browser-integration
 
 systemctl enable \
 	sddm.service
