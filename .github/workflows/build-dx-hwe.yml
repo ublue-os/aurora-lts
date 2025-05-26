@@ -1,9 +1,6 @@
 name: Build Aurora Helium DX HWE
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main

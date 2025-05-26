@@ -1,6 +1,5 @@
 ARG MAJOR_VERSION="${MAJOR_VERSION:-stream10}"
-FROM ghcr.io/ublue-os/config:latest@sha256:b7464c991152399a40ff5ce8991b3456c3bc0622cdbe51ca247cac8671b103ca AS config
-FROM quay.io/centos-bootc/centos-bootc@sha256:165e9103b7dffb108822488f5f631ea4ce73e75c76a8015aabf101afec1d9352
+FROM quay.io/centos-bootc/centos-bootc:$MAJOR_VERSION
 
 ARG ENABLE_DX="${ENABLE_DX:-0}"
 ARG ENABLE_HWE="${ENABLE_HWE:-0}"

@@ -2,9 +2,6 @@
 name: Build Aurora Helium
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
